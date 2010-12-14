@@ -75,7 +75,7 @@ class TemplateAdmin(TemplateModelAdmin):
             'classes': ('monospace',),
         }),
         (_('Advanced'), {
-            'fields': (('sites'),),
+            'fields': (('sites'), 'is_default'),
         }),
         (_('Date/time'), {
             'fields': (('creation_date', 'last_changed'),),
@@ -83,7 +83,8 @@ class TemplateAdmin(TemplateModelAdmin):
         }),
     )
     filter_horizontal = ('sites',)
-    list_display = ('name', 'creation_date', 'last_changed', 'site_list')
+    list_display = ('name', 'creation_date', 'last_changed', 'site_list',
+            'is_default',)
     list_filter = ('sites',)
     save_as = True
     search_fields = ('name', 'content')
