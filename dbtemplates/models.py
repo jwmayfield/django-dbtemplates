@@ -31,6 +31,7 @@ class Template(models.Model):
                                          default=datetime.now)
     last_changed = models.DateTimeField(_('last changed'),
                                         default=datetime.now)
+    is_default = models.BooleanField(default=False)
 
     objects = models.Manager()
     on_site = CurrentSiteManager('sites')
@@ -59,6 +60,10 @@ class Template(models.Model):
             pass
 
     def save(self, *args, **kwargs):
+        if self.is_default:
+            Template.objects.filter(name__exact=self.name)\
+                    .exclude(id=self.id)\
+                    .update(is_default=False)
         self.last_changed = datetime.now()
         # If content is empty look for a template with the given name and
         # populate the template instance with its content.
