@@ -33,7 +33,7 @@ def load_template_source(template_name, template_dirs=None):
         except:
             pass
     try:
-        template = Template.on_site.get(name__exact=template_name)
+        template = Template.on_site.filter(name__exact=template_name)[0]
         # Save in cache backend explicitly if manually deleted or invalidated
         if backend:
             backend.save(template_name, template.content)

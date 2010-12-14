@@ -92,6 +92,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.flatpages',
     'dbtemplates',
+    'south',
     'staticfiles',
     #'reversion',
 )
